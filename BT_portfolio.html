@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ananth Surampudi - Portfolio</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #3b82f6;
+      --primary-dark: #2563eb;
+      --light: #f8fafc;
+      --dark: #1e293b;
+    }
+    
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: var(--dark);
+      scroll-behavior: smooth;
+    }
+    
+    .bg-gradient-light {
+      background: linear-gradient(135deg, #ffffff 0%, #f0f9ff 100%);
+    }
+    
+    .bg-gradient-blue {
+      background: linear-gradient(135deg, #e0f2fe 0%, #bfdbfe 100%);
+    }
+    
+    .nav-dots .dot {
+      width: 12px;
+      height: 12px;
+      background-color: var(--primary);
+      transition: all 0.3s ease;
+    }
+    
+    .nav-dots .dot:hover {
+      background-color: white;
+      transform: scale(1.2);
+    }
+    
+    .section {
+      padding: 5rem 0;
+    }
+    
+    .profile-img {
+      width: 250px;
+      height: 250px;
+      background: linear-gradient(135deg, #93c5fd 0%, #60a5fa 100%);
+    }
+    
+    .skill-badge {
+      background-color: #dbeafe;
+      color: var(--primary-dark);
+    }
+    
+    .project-card {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .project-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    }
+    
+    .footer {
+      background-color: #1e293b;
+    }
+    
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+    
+    @keyframes ping {
+      75%, 100% { transform: scale(2); opacity: 0; }
+    }
+    
+    .animate-fade {
+      animation: fadeIn 0.8s ease forwards;
+    }
+    
+    .animate-fade-in-down {
+      animation: fadeInDown 0.8s ease forwards;
+    }
+    
+    .animate-fade-in-up {
+      animation: fadeInUp 0.8s ease forwards;
+    }
+    
+    .animate-bounce {
+      animation: bounce 2s infinite;
+    }
+    
+    .animate-ping {
+      animation: ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite;
+    }
+    
+    .delay-1 { animation-delay: 0.2s; }
+    .delay-2 { animation-delay: 0.4s; }
+    .delay-3 { animation-delay: 0.6s; }
+    
+    .contact-header h2 {
+      position: relative;
+      display: inline-block;
+    }
+    
+    .contact-header h2:after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background-color: var(--primary);
+    }
+    
+    .contact-info-card {
+      background: linear-gradient(135deg, #e6f0ff 0%, #e0e7ff 100%);
+      border-radius: 12px;
+      height: 100%;
+    }
+    
+    .contact-icon {
+      background-color: #d0e2ff;
+      padding: 12px;
+      border-radius: 50%;
+      margin-right: 16px;
+    }
+    
+    .send-btn {
+      background: linear-gradient(to right, var(--primary), var(--primary-dark));
+      transition: all 0.3s ease;
+    }
+    
+    .send-btn:hover {
+      transform: scale(1.02);
+      box-shadow: 0 10px 20px rgba(59, 130, 246, 0.2);
+    }
+    
+    .social-icon {
+      width: 42px;
+      height: 42px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      transition: all 0.3s ease;
+    }
+    
+    .form-control:focus {
+      box-shadow: 0 0 0 0.25rem rgba(59, 130, 246, 0.25);
+      border-color: #86b7fe;
+    }
+    
+    /* Hero section background noise effect */
+    .noise-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.1'/%3E%3C/svg%3E");
+    }
+    
+    /* Floating navigation dots */
+    .floating-nav {
+      position: fixed;
+      right: 2rem;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 100;
+    }
+    
+    .nav-dot {
+      width: 12px;
+      height: 12px;
+      background-color: var(--primary);
+      border-radius: 50%;
+      margin: 0.5rem 0;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+    
+    .nav-dot:hover {
+      transform: scale(1.3);
+      background-color: white;
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
+    }
+    
+    .nav-dot::after {
+      content: attr(title);
+      position: absolute;
+      right: 25px;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: var(--dark);
+      color: white;
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    
+    .nav-dot:hover::after {
+      opacity: 1;
+    }
+    
+    /* Timeline styling */
+    .timeline {
+      position: relative;
+    }
+    
+    .timeline::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      width: 2px;
+      background-color: var(--primary);
+      transform: translateX(-50%);
+    }
+    
+    .timeline-item-left {
+      padding-right: 2rem;
+      text-align: right;
+    }
+    
+    .timeline-item-right {
+      padding-left: 2rem;
+      text-align: left;
+    }
+    
+    .timeline-content {
+      position: relative;
+      padding: 1.5rem;
+      background-color: white;
+      border-radius: 0.5rem;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      border-left: 4px solid var(--primary);
+    }
+    
+    .timeline-item-right .timeline-content {
+      border-left: none;
+      border-right: 4px solid var(--primary);
+    }
+    
+    .timeline-badge {
+      position: absolute;
+      top: 0;
+      transform: translateY(-50%);
+      background-color: var(--primary);
+      color: white;
+      padding: 0.25rem 0.75rem;
+      border-radius: 1rem;
+      font-size: 0.875rem;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    
+    .timeline-item-left .timeline-badge {
+      right: 0;
+    }
+    
+    .timeline-item-right .timeline-badge {
+      left: 0;
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .timeline::before {
+        left: 1rem;
+      }
+      
+      .timeline-item-left,
+      .timeline-item-right {
+        padding-left: 2rem;
+        padding-right: 0;
+        text-align: left;
+      }
+      
+      .timeline-item-left .timeline-content,
+      .timeline-item-right .timeline-content {
+        border-left: 4px solid var(--primary);
+        border-right: none;
+      }
+      
+      .timeline-item-left .timeline-badge,
+      .timeline-item-right .timeline-badge {
+        left: 0;
+        right: auto;
+      }
+      
+      .floating-nav {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body class="bg-gradient-light">
+  <!-- Floating Navigation Dots -->
+  <div class="floating-nav d-none d-lg-flex flex-column">
+    <a href="#home" class="nav-dot" title="Home"></a>
+    <a href="#about" class="nav-dot" title="About"></a>
+    <a href="#skills" class="nav-dot" title="Skills"></a>
+    <a href="#experience" class="nav-dot" title="Experience"></a>
+    <a href="#projects" class="nav-dot" title="Projects"></a>
+    <a href="#contact" class="nav-dot" title="Contact"></a>
+  </div>
+
+  <!-- Hero Section -->
+  <section id="home" class="vh-100 d-flex align-items-center position-relative overflow-hidden">
+    <div class="position-absolute w-100 h-100 bg-gradient-blue opacity-90"></div>
+    <div class="noise-bg"></div>
+    <div class="container position-relative">
+      <div class="row justify-content-center text-center">
+        <div class="col-lg-8">
+          <span class="badge bg-light text-primary mb-4 px-4 py-2 fw-normal animate-fade delay-1">
+            <span class="position-relative me-2">
+              <span class="position-absolute top-0 start-0 w-100 h-100 rounded-circle bg-primary opacity-25 animate-ping"></span>
+              <span class="position-relative d-inline-block rounded-circle bg-primary" style="width: 12px; height: 12px;"></span>
+            </span>
+            Available for opportunities
+          </span>
+          <h1 class="display-3 fw-bold mb-4 animate-fade-in-down">Ananth <span class="text-primary">Surampudi</span></h1>
+          <p class="lead mb-5 animate-fade-in-up delay-1">
+            I architect <span class="fw-semibold text-primary">scalable solutions</span> and craft 
+            <span class="fw-semibold text-primary">intelligent applications</span> that bridge technology and human needs.
+          </p>
+          <div class="d-flex gap-3 justify-content-center animate-fade-in-up delay-2">
+            <a href="#projects" class="btn btn-primary btn-lg px-4 py-3 rounded-pill shadow">
+              <i class="fas fa-folder-open me-2"></i> View Projects
+            </a>
+            <a href="#contact" class="btn btn-outline-primary btn-lg px-4 py-3 rounded-pill shadow">
+              <i class="fas fa-envelope me-2"></i> Contact Me
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <a href="#about" class="position-absolute bottom-0 start-50 translate-middle-x mb-5 text-secondary animate-bounce">
+      <i class="fas fa-chevron-down fa-2x"></i>
+    </a>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="section bg-white">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-4 mb-5 mb-lg-0 animate-fade">
+          <div class="profile-img rounded-circle mx-auto shadow-lg position-relative border border-4 border-white">
+            <div class="w-100 h-100 d-flex align-items-center justify-content-center text-primary fw-bold display-4">AS</div>
+          </div>
+          <div class="badge bg-primary text-white px-4 py-2 position-absolute start-50 translate-middle mt-3 shadow">
+            <i class="fas fa-user me-2"></i> About Me
+          </div>
+        </div>
+        <div class="col-lg-8 animate-fade delay-1">
+          <h2 class="display-4 fw-bold mb-4"><span class="text-primary">Crafting</span> Digital Experiences</h2>
+          <div class="mb-5">
+            <p class="mb-3">
+              I'm a passionate software developer with a Master's in Computer Science from Auburn University at Montgomery. My journey in tech has been driven by curiosity and a relentless pursuit of elegant solutions to complex problems.
+            </p>
+            <p class="mb-3">
+              What sets me apart is my ability to bridge the gap between <span class="fw-semibold">technical implementation</span> and <span class="fw-semibold">user experience</span>. I don't just write code—I architect systems that are scalable, maintainable, and delightful to use.
+            </p>
+            <p>
+              When I'm not coding, you'll find me exploring the latest in AI advancements, contributing to open-source projects, or mentoring aspiring developers.
+            </p>
+          </div>
+          <div class="row g-3 animate-fade delay-2">
+            <div class="col-md-4">
+              <div class="p-4 bg-light rounded border border-light-subtle">
+                <h3 class="fw-bold text-primary mb-0">5+</h3>
+                <p class="text-muted mb-0">Projects Completed</p>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="p-4 bg-light rounded border border-light-subtle">
+                <h3 class="fw-bold text-primary mb-0">2</h3>
+                <p class="text-muted mb-0">Years Experience</p>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="p-4 bg-light rounded border border-light-subtle">
+                <h3 class="fw-bold text-primary mb-0">AWS</h3>
+                <p class="text-muted mb-0">Cloud Certified</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills Section -->
+  <section id="skills" class="section bg-gradient-blue">
+    <div class="container">
+      <div class="text-center mb-5 animate-fade">
+        <h2 class="display-4 fw-bold mb-3">
+          <i class="fas fa-code text-primary me-3"></i>
+          Technical Expertise
+        </h2>
+        <p class="lead text-muted">My toolkit for building exceptional digital experiences</p>
+      </div>
+      
+      <div class="row g-4">
+        <!-- Frontend Development -->
+        <div class="col-md-6 col-lg-4 animate-fade delay-1">
+          <div class="p-4 bg-white rounded shadow-sm h-100">
+            <div class="display-4 mb-3">💻</div>
+            <h3 class="h4 fw-bold mb-3">Frontend Development</h3>
+            <div class="d-flex flex-wrap gap-2">
+              <span class="skill-badge badge rounded-pill px-3 py-2">React.js</span>
+              <span class="skill-badge badge rounded-pill px-3 py-2">JavaScript</span>
+              <span class="skill-badge badge rounded-pill px-3 py-2">HTML5</span>
+              <span class="skill-badge badge rounded-pill px-3 py-2">CSS3</span>
+              <span class="skill-badge badge rounded-pill px-3 py-2">Tailwind CSS</span>
+              <span class="skill-badge badge rounded-pill px-3 py-2">Bootstrap</span>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Backend Development -->
+        <div class="col-md-6 col-lg-4 animate-fade delay-1">
+          <div class="p-4 bg-white rounded shadow-sm h-100">
+            <div class="display-4 mb-3">⚙️</div>
+            <h3 class="h4 fw-bold mb-3">Backend Development</h3>
+            <div class="d-flex flex-wrap gap-2">
+              <span class="skill-badge badge rounded-pill px-3 py-2">Node.js</span>
+              <span class="skill-badge badge rounded-pill px-3 py-2">Spring Boot</span>
+              <span class="skill-badge badge rounded-pill px-3 py-2">RESTful APIs</span>
+              <span class="skill-badge badge rounded-pill px-3 py-2">Microservices</span>
+              <span class="skill-badge badge rounded-pill px-3 py-2">GraphQL</span>
+              <span class="skill-badge badge rounded-pill px-3 py-2">JWT</span>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Cloud & DevOps -->
+        <div class="col-md-6 col-lg-4 animate-fade delay-1">
+          <div class="p-4 bg-white rounded shadow-sm h-100">
+            <div class="display-4 mb-3">☁️</div>
+            <h3 class="h4 fw-bold mb-3">Cloud & DevOps</h3>
+            <div class="d-flex flex-wrap gap-2">
+              <span class="skill-badge badge rounded-pill px-3 py-2">AWS</span>
+              <span class="skill-badge badge rounded-pill px-3 py-2">S3</span>
+              <span class="skill-badge badge rounded-pill px-3 py-2">Lambda</span>
+              <span class="skill-badge badge rounded-pill px-3 py-2">EC2</span>
+              <span class="skill-badge badge rounded-pill px-3 py-2">Docker</span>
+              <span class="skill-badge badge rounded-pill px-3 py-2">CI/CD</span>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Data & AI -->
+        <div class="col-md-6 col-lg-4 animate-fade delay-2">
+          <div class="p-4 bg-white rounded shadow-sm h-100">
+            <div class="display-4 mb-3">🧠</div>
+            <h3 class="h4 fw-bold mb-3">Data & AI</h3>
+            <div class="d-flex flex-wrap gap-2">
+              <span class="skill-badge badge rounded-pill px-3 py-2">Python</span>
+              <span class="skill-badge badge rounded-pill px-3 py-2">TensorFlow</span>
+              <span class="skill-badge badge rounded-pill px-3 py-2">Machine Learning</span>
+              <span class="skill-badge badge rounded-pill px-3 py-2">Pandas</span>
+              <span class="skill-badge badge rounded-pill px-3 py-2">NumPy</span>
+              <span class="skill-badge badge rounded-pill px-3 py-2">OpenCV</span>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Databases -->
+        <div class="col-md-6 col-lg-4 animate-fade delay-2">
+          <div class="p-4 bg-white rounded shadow-sm h-100">
+            <div class="display-4 mb-3">🗄️</div>
+            <h3 class="h4 fw-bold mb-3">Databases</h3>
+            <div class="d-flex flex-wrap gap-2">
+              <span class="skill-badge badge rounded-pill px-3 py-2">MySQL</span>
+              <span class="skill-badge badge rounded-pill px-3 py-2">MongoDB</span>
+              <span class="skill-badge badge rounded-pill px-3 py-2">PostgreSQL</span>
+              <span class="skill-badge badge rounded-pill px-3 py-2">Firebase</span>
+              <span class="skill-badge badge rounded-pill px-3 py-2">ORM</span>
+              <span class="skill-badge badge rounded-pill px-3 py-2">SQL</span>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Tools & Methods -->
+        <div class="col-md-6 col-lg-4 animate-fade delay-2">
+          <div class="p-4 bg-white rounded shadow-sm h-100">
+            <div class="display-4 mb-3">🛠️</div>
+            <h3 class="h4 fw-bold mb-3">Tools & Methods</h3>
+            <div class="d-flex flex-wrap gap-2">
+              <span class="skill-badge badge rounded-pill px-3 py-2">Git</span>
+              <span class="skill-badge badge rounded-pill px-3 py-2">Agile</span>
+              <span class="skill-badge badge rounded-pill px-3 py-2">Scrum</span>
+              <span class="skill-badge badge rounded-pill px-3 py-2">Linux</span>
+              <span class="skill-badge badge rounded-pill px-3 py-2">Jira</span>
+              <span class="skill-badge badge rounded-pill px-3 py-2">VS Code</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Experience Section -->
+  <section id="experience" class="section bg-white">
+    <div class="container">
+      <div class="text-center mb-5 animate-fade">
+        <h2 class="display-4 fw-bold mb-3">
+          <i class="fas fa-briefcase text-primary me-2"></i>
+          Professional Journey
+        </h2>
+        <p class="lead text-muted">Where I've worked and what I've accomplished</p>
+      </div>
+  
+      <div class="row justify-content-center">
+        <div class="col-lg-10">
+          <div class="timeline">
+            <!-- Experience 1 -->
+            <div class="row mb-4 timeline-item-left animate-fade delay-1">
+              <div class="col-md-6 pe-md-4 text-md-end">
+                <div class="timeline-content">
+                  <span class="timeline-badge">2022 (3 Months)</span>
+                  <h3 class="h4 fw-bold">Cloud Computing Trainee</h3>
+                  <p class="text-primary fw-medium mb-3">AWS re/Start Program, Conduira</p>
+                  <ul class="list-unstyled">
+                    <li class="mb-2 position-relative ps-3">
+                      <i class="fas fa-circle text-primary position-absolute start-0 top-50 translate-middle-y" style="font-size: 8px;"></i>
+                      Completed intensive 12-week training on cloud computing fundamentals
+                    </li>
+                    <li class="mb-2 position-relative ps-3">
+                      <i class="fas fa-circle text-primary position-absolute start-0 top-50 translate-middle-y" style="font-size: 8px;"></i>
+                      Hands-on experience with EC2, S3, IAM, RDS, and VPC
+                    </li>
+                    <li class="position-relative ps-3">
+                      <i class="fas fa-circle text-primary position-absolute start-0 top-50 translate-middle-y" style="font-size: 8px;"></i>
+                      Earned AWS Certified Cloud Practitioner certification
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="col-md-6 d-none d-md-block"></div>
+            </div>
+            
+            <!-- Experience 2 -->
+            <div class="row timeline-item-right animate-fade delay-2">
+              <div class="col-md-6 d-none d-md-block"></div>
+              <div class="col-md-6 ps-md-4">
+                <div class="timeline-content">
+                  <span class="timeline-badge">2021 (2 Months)</span>
+                  <h3 class="h4 fw-bold">Software Development Intern</h3>
+                  <p class="text-primary fw-medium mb-3">Coding Hub Innovations Pvt. Ltd.</p>
+                  <ul class="list-unstyled">
+                    <li class="mb-2 position-relative ps-3">
+                      <i class="fas fa-circle text-primary position-absolute start-0 top-50 translate-middle-y" style="font-size: 8px;"></i>
+                      Trained in Core Java, MySQL, and web technologies
+                    </li>
+                    <li class="mb-2 position-relative ps-3">
+                      <i class="fas fa-circle text-primary position-absolute start-0 top-50 translate-middle-y" style="font-size: 8px;"></i>
+                      Built Java applications with MySQL backends
+                    </li>
+                    <li class="position-relative ps-3">
+                      <i class="fas fa-circle text-primary position-absolute start-0 top-50 translate-middle-y" style="font-size: 8px;"></i>
+                      Implemented clean code principles and Git workflows
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects Section -->
+  <section id="projects" class="section bg-gradient-blue">
+    <div class="container">
+      <div class="text-center mb-5 animate-fade">
+        <h2 class="display-4 fw-bold mb-3">
+          <i class="fas fa-folder-open text-primary me-2"></i>
+          Featured Projects
+        </h2>
+        <p class="lead text-muted">A selection of my recent work</p>
+      </div>
+  
+      <div class="row g-4">
+        <!-- Project 1 -->
+        <div class="col-lg-4 animate-fade delay-1">
+          <div class="card h-100 border-0 shadow-sm project-card">
+            <div class="card-img-top bg-gradient-primary d-flex align-items-center justify-content-center" style="height: 200px;">
+              <span class="display-1 fw-bold text-white opacity-25">W</span>
+            </div>
+            <div class="card-body">
+              <h3 class="h4 fw-bold">Real-Time Weather Dashboard</h3>
+              <p class="text-muted mb-4">Interactive weather application with dynamic visualization of current and forecasted conditions using OpenWeatherMap API.</p>
+              <div class="d-flex flex-wrap gap-2 mb-4">
+                <span class="badge bg-primary bg-opacity-10 text-primary">React</span>
+                <span class="badge bg-primary bg-opacity-10 text-primary">Chart.js</span>
+                <span class="badge bg-primary bg-opacity-10 text-primary">API</span>
+                <span class="badge bg-primary bg-opacity-10 text-primary">Tailwind CSS</span>
+              </div>
+              <a href="#" class="btn btn-outline-primary">View Project <i class="fas fa-arrow-right ms-2"></i></a>
+            </div>
+          </div>
+        </div>
+  
+        <!-- Project 2 -->
+        <div class="col-lg-4 animate-fade delay-2">
+          <div class="card h-100 border-0 shadow-sm project-card">
+            <div class="card-img-top bg-gradient-primary d-flex align-items-center justify-content-center" style="height: 200px;">
+              <span class="display-1 fw-bold text-white opacity-25">M</span>
+            </div>
+            <div class="card-body">
+              <h3 class="h4 fw-bold">Instance Segmentation with Mask R-CNN</h3>
+              <p class="text-muted mb-4">Deep learning model for object detection on driving datasets with detailed performance analysis and visualization.</p>
+              <div class="d-flex flex-wrap gap-2 mb-4">
+                <span class="badge bg-primary bg-opacity-10 text-primary">Python</span>
+                <span class="badge bg-primary bg-opacity-10 text-primary">TensorFlow</span>
+                <span class="badge bg-primary bg-opacity-10 text-primary">OpenCV</span>
+                <span class="badge bg-primary bg-opacity-10 text-primary">Matplotlib</span>
+              </div>
+              <a href="#" class="btn btn-outline-primary">View Project <i class="fas fa-arrow-right ms-2"></i></a>
+            </div>
+          </div>
+        </div>
+  
+        <!-- Project 3 -->
+        <div class="col-lg-4 animate-fade delay-3">
+          <div class="card h-100 border-0 shadow-sm project-card">
+            <div class="card-img-top bg-gradient-primary d-flex align-items-center justify-content-center" style="height: 200px;">
+              <span class="display-1 fw-bold text-white opacity-25">A</span>
+            </div>
+            <div class="card-body">
+              <h3 class="h4 fw-bold">AWS Static Website Hosting</h3>
+              <p class="text-muted mb-4">Highly available static website deployment with CI/CD pipeline, CDN distribution, and HTTPS security.</p>
+              <div class="d-flex flex-wrap gap-2 mb-4">
+                <span class="badge bg-primary bg-opacity-10 text-primary">AWS S3</span>
+                <span class="badge bg-primary bg-opacity-10 text-primary">CloudFront</span>
+                <span class="badge bg-primary bg-opacity-10 text-primary">Route 53</span>
+                <span class="badge bg-primary bg-opacity-10 text-primary">ACM</span>
+              </div>
+              <a href="#" class="btn btn-outline-primary">View Project <i class="fas fa-arrow-right ms-2"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="section bg-white">
+    <div class="container">
+      <div class="text-center mb-5 animate-fade">
+        <h2 class="display-4 fw-bold mb-3">
+          <i class="fas fa-envelope text-primary me-2"></i>
+          <span class="contact-header">Get In Touch</span>
+        </h2>
+        <p class="lead text-muted">Have a project in mind or want to connect? I'd love to hear from you.</p>
+      </div>
+
+      <div class="row g-4">
+        <div class="col-lg-6 animate-fade delay-1">
+          <form class="space-y-4">
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label for="name" class="form-label">Name</label>
+                <input type="text" class="form-control form-control-lg" id="name" placeholder="Your name">
+              </div>
+              <div class="col-md-6">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control form-control-lg" id="email" placeholder="your.email@example.com">
+              </div>
+            </div>
+            <div>
+              <label for="subject" class="form-label">Subject</label>
+              <input type="text" class="form-control form-control-lg" id="subject" placeholder="Subject">
+            </div>
+            <div>
+              <label for="message" class="form-label">Message</label>
+              <textarea class="form-control form-control-lg" id="message" rows="5" placeholder="Your message here..."></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary btn-lg w-100 send-btn py-3">
+              Send Message
+            </button>
+          </form>
+        </div>
+
+        <div class="col-lg-6 animate-fade delay-2">
+          <div class="contact-info-card p-4 p-md-5 h-100">
+            <h3 class="fw-bold text-gray-800 mb-4">Contact Information</h3>
+            <div class="space-y-4">
+              <div class="d-flex align-items-start">
+                <div class="contact-icon">
+                  <i class="fas fa-envelope text-primary"></i>
+                </div>
+                <div>
+                  <h4 class="text-sm text-muted mb-1">Email</h4>
+                  <a href="mailto:ananth.surampudi123@gmail.com" class="text-primary text-decoration-none">ananth.surampudi123@gmail.com</a>
+                </div>
+              </div>
+              <div class="d-flex align-items-start">
+                <div class="contact-icon">
+                  <i class="fas fa-laptop text-primary"></i>
+                </div>
+                <div>
+                  <h4 class="text-sm text-muted mb-1">Phone</h4>
+                  <p class="text-gray-800 mb-0">+1 (346) 634-6158</p>
+                </div>
+              </div>
+              <div class="d-flex align-items-start">
+                <div class="contact-icon">
+                  <i class="fab fa-linkedin-in text-primary"></i>
+                </div>
+                <div>
+                  <h4 class="text-sm text-muted mb-1">LinkedIn</h4>
+                  <a href="https://www.linkedin.com/in/ananth-surampudi-4b27552b7" target="_blank" class="text-primary text-decoration-none">ananth-surampudi</a>
+                </div>
+              </div>
+              <div class="d-flex align-items-start">
+                <div class="contact-icon">
+                  <i class="fab fa-github text-primary"></i>
+                </div>
+                <div>
+                  <h4 class="text-sm text-muted mb-1">GitHub</h4>
+                  <a href="https://github.com/S-Ananth7" target="_blank" class="text-primary text-decoration-none">S-Ananth7</a>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-5">
+              <h3 class="fw-bold text-gray-800 mb-3">Let's Collaborate</h3>
+              <p class="text-muted mb-4">
+                I'm open to freelance opportunities, interesting project collaborations, or just a friendly tech discussion
+                </p>
+                <div class="d-flex gap-3">
+                  <a href="https://www.linkedin.com/in/ananth-surampudi-4b27552b7" target="_blank" class="social-icon bg-primary text-white">
+                    <i class="fab fa-linkedin-in"></i>
+                  </a>
+                  <a href="https://github.com/S-Ananth7" target="_blank" class="social-icon bg-dark text-white">
+                    <i class="fab fa-github"></i>
+                  </a>
+                  <a href="#" class="social-icon bg-danger text-white">
+                    <i class="fab fa-instagram"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  
+    <!-- Footer -->
+    <footer class="footer text-white py-5">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-md-6 text-center text-md-start mb-3 mb-md-0 animate-fade">
+            <p class="mb-0">
+              &copy; <script>document.write(new Date().getFullYear())</script> Ananth Surampudi. All rights reserved.
+            </p>
+          </div>
+          <div class="col-md-6 text-center text-md-end animate-fade delay-1">
+            <div class="d-flex justify-content-center justify-content-md-end gap-3">
+              <a href="https://www.linkedin.com/in/ananth-surampudi-4b27552b7" target="_blank" class="text-white hover-primary text-decoration-none fs-5">
+                <i class="fab fa-linkedin-in"></i>
+                <span class="visually-hidden">LinkedIn</span>
+              </a>
+              <a href="https://github.com/S-Ananth7" target="_blank" class="text-white hover-primary text-decoration-none fs-5">
+                <i class="fab fa-github"></i>
+                <span class="visually-hidden">GitHub</span>
+              </a>
+              <a href="mailto:ananth.surampudi123@gmail.com" class="text-white hover-primary text-decoration-none fs-5">
+                <i class="fas fa-envelope"></i>
+                <span class="visually-hidden">Email</span>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 text-center mt-4 animate-fade delay-2">
+            <p class="text-muted small">
+              Built with <span class="text-danger">❤️</span> using Bootstrap 5. Deployed on Netlify.
+            </p>
+          </div>
+        </div>
+      </div>
+    </footer>
+  
+    <!-- Back to Top Button -->
+    <a href="#home" class="btn btn-primary position-fixed bottom-3 end-3 rounded-circle shadow-lg d-flex align-items-center justify-content-center" style="width: 50px; height: 50px; z-index: 99;" title="Back to Top">
+      <i class="fas fa-arrow-up"></i>
+    </a>
+  
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JavaScript for animations -->
+    <script>
+      // Add scroll animations
+      document.addEventListener('DOMContentLoaded', function() {
+        const animateElements = document.querySelectorAll('.animate-fade, .animate-fade-in-down, .animate-fade-in-up');
+        
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('animated');
+            }
+          });
+        }, {
+          threshold: 0.1
+        });
+        
+        animateElements.forEach(element => {
+          observer.observe(element);
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+          anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            
+            const targetId = this.getAttribute('href');
+            if (targetId === '#') return;
+            
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+              targetElement.scrollIntoView({
+                behavior: 'smooth'
+              });
+            }
+          });
+        });
+      });
+    </script>
+  </body>
+  </html>
